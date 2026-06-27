@@ -113,5 +113,5 @@ Siehe [GOVERNANCE.md](GOVERNANCE.md) für das Sicherheitsmodell.
 
 ## Hinweis
 
-Dieses Repository ist ein öffentliches Showcase der Architektur und Entwicklungsphilosophie.  
-Produktiver Code, Konfigurationsdaten und Credentials sind nicht enthalten.
+Dieses Repository dokumentiert Architektur und Designentscheidungen eines produktiv laufenden Systems.  
+Kein produktiver Code, keine Konfigurationsdaten, keine Credentials enthalten.
