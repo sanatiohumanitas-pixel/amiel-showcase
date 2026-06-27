@@ -1,0 +1,117 @@
+# Amiel — Semi-autonomes Agentensystem
+
+> Persönlicher KI-Begleiter mit Event-Sourcing-Architektur, Ziel-Tracking und Governance-Layer.  
+> Produktiv betrieben auf einem Linux-Server (Hetzner, Ubuntu 22.04).
+
+---
+
+## Was ist Amiel?
+
+Amiel ist ein semi-autonomes, event-getriebenes Agentensystem, das als persönlicher Begleiter für seinen Betreiber fungiert. Es verfolgt Ziele, führt Tasks aus, lernt aus Ergebnissen und wird durch ein mehrstufiges Governance-Layer kontrolliert.
+
+**Kernmerkmale:**
+
+- Läuft produktiv auf einem dedizierten Linux-Server
+- Verarbeitet Aufgaben asynchron über eine persistente Task-Queue
+- Speichert alle Zustandsänderungen als unveränderliche Events (append-only)
+- Bewertet eigene Ergebnisse und passt Prioritäten dynamisch an
+- Wird durch einen Governance-Layer mit mehreren Sicherheitsstufen überwacht
+
+Amiel ist kein Chatbot mit Gedächtnis-Plugin — es ist ein eigenständiges System mit Zustandsmaschine, Feedback-Loops und definierten Verantwortlichkeitsgrenzen zwischen menschlicher Richtung und maschineller Ausführung.
+
+---
+
+## Architektur (Kurzübersicht)
+
+### Drei Wahrheitsschichten
+
+| Schicht | Zweck | Charakteristik |
+|---|---|---|
+| Event Log | Unveränderliche Protokollierung jeder Aktion | append-only, mit Kausalitätskette |
+| State DB | Aktueller Systemzustand (Tasks, Goals, Memory) | WAL-Modus, konsistente Reads |
+| Memory | Erfahrungswissen mit Relevanz-Scoring | Tier-System: hot / warm / cold |
+
+### Rollenmodell
+
+```
+William (Richtung & Entscheidung)
+    └── Orchestrator (Koordination & Planung)
+            ├── Subagent: ki_tools_research
+            ├── Subagent: wissensdatenbank
+            └── Subagent: [weitere spezialisierte Agenten]
+```
+
+### Governance
+
+Ein eigenständiges Governance-Modul überwacht alle Aktionen des Systems in Echtzeit.  
+Es kennt fünf Eskalationsstufen (OBSERVE → WARN → SOFT_BLOCK → HARD_BLOCK → FREEZE)  
+und eine Actor-basierte Write-Ownership-Matrix, die definiert, welche Systemkomponente  
+welche Datenbankfelder schreiben darf.
+
+### LLM-Integration
+
+- **Claude API (Anthropic)** — Hauptmodell für Reasoning und Generierung
+- **Moonshot/Kimi API** — Ergänzend für spezifische Aufgaben
+
+---
+
+## Entwicklungsphasen
+
+| Phase | Titel | Status |
+|---|---|---|
+| 1 | Fundament: Task-Queue, Event Log, SQLite-Schema | ✅ Abgeschlossen |
+| 2 | Goal-System: Ziel-Tracking mit Fortschrittsmetriken | ✅ Abgeschlossen |
+| 3 | Memory-System: Tier-basiertes Gedächtnis mit Relevanz-Scoring | ✅ Abgeschlossen |
+| 4 | Feedback-Loop: Outcome-Evaluation und Pattern-Learning | ✅ Abgeschlossen |
+| 5 | Governance-Härtung: Actor-Matrix, FREEZE-Modus, Health-API | 🔄 In Arbeit |
+| 6 | Wissens-Autonomie: Selbstständige Wissensakquise und -bewertung | 📋 Geplant |
+| 7 | Orchestrator-Evolution: Multi-Agenten-Koordination mit Delegation | 📋 Geplant |
+
+---
+
+## Technologie-Stack
+
+| Bereich | Technologie |
+|---|---|
+| Laufzeitumgebung | Python 3.11, Linux/systemd, Cron |
+| Datenpersistenz | SQLite (WAL-Modus), append-only Event Log |
+| LLM-Integration | Claude API (Anthropic), Moonshot/Kimi API |
+| Versionierung | Git / GitHub |
+| Benachrichtigungen | Telegram Bot API |
+| Design-Prinzip | Event-Sourcing, Single Source of Truth |
+
+---
+
+## Architekturprinzipien
+
+**1. Stabilität vor Intelligenz**  
+Jede neue Funktion muss auf einem stabilen Fundament stehen. Kein Feature ohne Testbarkeit, keine Autonomie ohne Kontrollmechanismus.
+
+**2. Schrittweise Evolution**  
+Das System wächst in klar abgegrenzten Phasen. Jede Phase schließt mit verifizierten Erfolgskriterien ab, bevor die nächste beginnt.
+
+**3. Messen statt vermuten**  
+Entscheidungen werden datenbasiert getroffen. Der Event Log und das Outcome-Tracking liefern die Grundlage — keine Annahmen ohne Evidenz.
+
+**4. Single Source of Truth**  
+Jeder Systemzustand hat genau eine autoritative Quelle. Redundante Wahrheiten führen zu Drift — das wird durch die Drei-Schichten-Architektur verhindert.
+
+**5. Menschliche Souveränität**  
+William gibt die Richtung. Das System führt aus. Diese Grenze ist architektonisch verankert — nicht nur konventionell vereinbart.
+
+---
+
+## Projektstatus
+
+Aktuell in **Phase 5** (Governance-Härtung).
+
+Siehe [ROADMAP.md](ROADMAP.md) für Details zu allen Phasen.  
+Siehe [ARCHITEKTUR.md](ARCHITEKTUR.md) für das vollständige Systemdesign.  
+Siehe [GOVERNANCE.md](GOVERNANCE.md) für das Sicherheitsmodell.
+
+---
+
+## Hinweis
+
+Dieses Repository ist ein öffentliches Showcase der Architektur und Entwicklungsphilosophie.  
+Produktiver Code, Konfigurationsdaten und Credentials sind nicht enthalten.

@@ -1,0 +1,21 @@
+graph TD
+    W[William\nRichtung & Entscheidung] --> O[Orchestrator\nKoordination]
+    O --> S1[Subagent:\nki_tools_research]
+    O --> S2[Subagent:\nwissensdatenbank]
+    O --> S3[Subagent:\n...]
+
+    S1 --> EL[Event Log\nappend-only]
+    S2 --> EL
+    S3 --> EL
+
+    EL --> EV[Outcome-Evaluator]
+    EV --> PL[Pattern-Learner]
+    PL --> O
+
+    EL --> DB[(State DB\nTasks · Goals)]
+    EL --> MEM[(Memory Store\nhot · warm · cold)]
+
+    G[Governance Layer\nOBSERVE → FREEZE] -.->|überwacht| O
+    G -.->|überwacht| S1
+    G -.->|überwacht| S2
+    G -.->|überwacht| S3
