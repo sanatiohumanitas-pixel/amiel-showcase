@@ -1,5 +1,10 @@
 # Amiel — Semi-autonomes Agentensystem
 
+![Status](https://img.shields.io/badge/System-produktiv%20seit%20Feb%202026-green)
+![Sprache](https://img.shields.io/badge/Python-3.11-blue)
+![DB](https://img.shields.io/badge/SQLite-WAL--Modus-lightgrey)
+![LLM](https://img.shields.io/badge/LLM-Claude%20API%20%2B%20Moonshot-orange)
+
 > Persönlicher KI-Begleiter mit Event-Sourcing-Architektur, Ziel-Tracking und Governance-Layer.  
 > Produktiv betrieben auf einem Linux-Server (Hetzner, Ubuntu 22.04).
 
@@ -18,6 +23,16 @@ Amiel ist ein semi-autonomes, event-getriebenes Agentensystem, das als persönli
 - Wird durch einen Governance-Layer mit mehreren Sicherheitsstufen überwacht
 
 Amiel ist kein Chatbot mit Gedächtnis-Plugin — es ist ein eigenständiges System mit Zustandsmaschine, Feedback-Loops und definierten Verantwortlichkeitsgrenzen zwischen menschlicher Richtung und maschineller Ausführung.
+
+---
+
+## Warum dieses Projekt?
+
+Ich wollte verstehen wie autonome Systeme wirklich funktionieren —
+nicht in der Theorie, sondern unter echten Produktivbedingungen.
+Also habe ich eines gebaut. Amiel ist das Ergebnis: ein System das
+täglich läuft, aus seinen eigenen Fehlern lernt und sich schrittweise
+weiterentwickelt — ohne dass ich jeden Schritt manuell steuere.
 
 ---
 
@@ -101,6 +116,22 @@ William gibt die Richtung. Das System führt aus. Diese Grenze ist architektonis
 
 ---
 
+## Was ich dabei gelernt habe
+
+- **LLM-Output ist kein Beweis** — Text der "Ja, erledigt" sagt bedeutet
+  nichts ohne DB-Event als Nachweis. Dieses Anti-Pattern ("Phantom-Done")
+  hat mich Wochen gekostet bis ich es systematisch eliminiert hatte.
+- **Governance muss im Code leben, nicht in Dokumenten** — Eine
+  Constitution als Datei ändert nichts. Erst als ich sie als laufenden
+  Code implementiert habe, hat sie gewirkt.
+- **Messen statt vermuten** — Jede Verbesserung braucht eine Baseline
+  davor und eine Messung danach. Sonst ist es nur Hoffnung.
+- **Stabilität vor Intelligenz** — Ein stabiles einfaches System ist
+  wertvoller als ein cleveres instabiles. Das klingt offensichtlich,
+  ist es in der Praxis nicht.
+
+---
+
 ## Projektstatus
 
 Aktuell in **Phase 5** (Governance-Härtung).
@@ -115,3 +146,18 @@ Siehe [GOVERNANCE.md](GOVERNANCE.md) für das Sicherheitsmodell.
 
 Dieses Repository dokumentiert Architektur und Designentscheidungen eines produktiv laufenden Systems.  
 Kein produktiver Code, keine Konfigurationsdaten, keine Credentials enthalten.
+
+---
+
+## Roadmap
+
+Das System wird aktiv weiterentwickelt:
+
+| Phase | Thema | Status |
+|-------|-------|--------|
+| Phase 5e | Governance-Härtung (WARN/FREEZE-Modi) | 🔄 in Arbeit |
+| Phase 6 | Orchestrator — zentrale Aufgabenkoordination | 🔴 Juli 2026 |
+| Phase 7 | Lokales Modell via Ollama auf Mac Mini | 🔴 geplant |
+
+Prinzip: Keine neuen Features ohne stabile Grundlage.
+Jede Phase wird beobachtet, gemessen und erst dann erweitert.
