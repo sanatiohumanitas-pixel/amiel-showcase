@@ -142,6 +142,28 @@ Siehe [GOVERNANCE.md](GOVERNANCE.md) für das Sicherheitsmodell.
 
 ---
 
+## Betriebsdaten
+
+Das System läuft produktiv — hier sind die echten Zahlen:
+
+| Metrik | Wert |
+|--------|------|
+| System läuft seit (Event Log) | Mai 2026 |
+| Gesamtzahl Events | 50.605 |
+| Events letzte 30 Tage | 15.211 |
+| Ø Events pro Tag (akt.) | ~25 |
+| Abgeschlossene Tasks | 113 |
+| Aktive Goals | 1 |
+
+**Outcome-Verteilung (letzte 30 Tage, 549 bewertete Aktionen):**  
+87 % neutral · 10 % useful · &lt;3 % inconclusive
+
+Die Mehrheit der Aktionen schließt neutral ab — das System verarbeitet viele Routineaufgaben ohne messbaren Fortschritts-Delta. "Useful" bedeutet: nachweislicher Beitrag zu einem aktiven Ziel.
+
+*Alle Zahlen direkt aus der produktiven SQLite-Datenbank abgerufen.*
+
+---
+
 ## Hinweis
 
 Dieses Repository dokumentiert Architektur und Designentscheidungen eines produktiv laufenden Systems.  
